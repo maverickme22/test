@@ -29,7 +29,7 @@ spec:
         - containerPort: 50051
         securityContext:  
           # runAsUser: kappa
-          runAsNonRoot: true
+          # runAsNonRoot: true
           privileged: false
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true

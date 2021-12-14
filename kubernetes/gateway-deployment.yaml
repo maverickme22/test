@@ -34,7 +34,7 @@ spec:
             value: QA
         securityContext:  
           # runAsUser: 1000
-          runAsNonRoot: true
+          # runAsNonRoot: true
           privileged: false
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
