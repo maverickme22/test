@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: kappa
+  labels:
+    app: auth-svc
+    environment: dev
+  
+spec:
+  selector:
+    matchLabels:
+      app: auth-svc
+      environment: dev
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: auth-svc
+        environment: dev
+    spec:
+      containers:
+      - name: auth-service
+        image: maverickme22/auth:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 50051
