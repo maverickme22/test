@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: gateway-backend-deployment
   labels:
-    app: auth-gateway
+    app: gateway-svc
     environment: dev
   
 spec:
   selector:
     matchLabels:
-      app: auth-gateway
+      app: gateway-svc
       environment: dev
   replicas: 1
   template:
     metadata:
       labels:
-        app: auth-gateway
+        app: gateway-svc
         environment: dev
     spec:
       containers:
-      - name: auth-gateway
+      - name: gateway-svc
         image: maverickme22/gateway:latest
         resources:
           requests:
