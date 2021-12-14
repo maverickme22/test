@@ -27,3 +27,6 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 8000
+        env:
+          - name: AUTH_SERVICE_URL
+            value: auth-backend-service:50051
