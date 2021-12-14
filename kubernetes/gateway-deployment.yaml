@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: auth-gateway
+    environment: dev
+  
+spec:
+  selector:
+    matchLabels:
+      app: auth-gateway
+      environment: dev
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: auth-gateway
+        environment: dev
+    spec:
+      containers:
+      - name: auth-gateway
+        image: maverickme22/gateway:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8000
