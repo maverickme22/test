@@ -1,0 +1,5 @@
+resources:
+  - auth-deployment.yaml
+  - auth-service.yaml
+  - gateway-deployment.yaml
+  - gateway-service.yaml
