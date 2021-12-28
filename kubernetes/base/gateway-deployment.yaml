@@ -38,9 +38,9 @@ spec:
             port: 8000
           initialDelaySeconds: 5
           periodSeconds: 10
-        securityContext:  
-          # runAsUser: 1000
-          # runAsNonRoot: true
-          privileged: false
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
+        # securityContext:  
+        #   # runAsUser: 1000
+        #   # runAsNonRoot: true
+        #   privileged: false
+        #   allowPrivilegeEscalation: false
+        #   readOnlyRootFilesystem: true

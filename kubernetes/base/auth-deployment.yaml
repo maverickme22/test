@@ -27,9 +27,9 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 80
-        securityContext:  
-          # runAsUser: kappa
-          # runAsNonRoot: true
-          privileged: false
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
+        # securityContext:  
+        #   # runAsUser: kappa
+        #   # runAsNonRoot: true
+        #   privileged: false
+        #   allowPrivilegeEscalation: false
+        #   readOnlyRootFilesystem: true
