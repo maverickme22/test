@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/maverickme22/test.git
     targetRevision: HEAD
     path: helm/example-app
+    helm:
+      valueFiles: ['values-dev.yaml']
   destination:
     server: https://kubernetes.default.svc
     namespace: dev
