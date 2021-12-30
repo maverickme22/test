@@ -10,7 +10,7 @@ spec:
       environment: dev
       role: authService
       tier: backend
-  replicas: 1
+  replicas: { { .Values.replicaCount } }
   template:
     metadata:
       labels:
