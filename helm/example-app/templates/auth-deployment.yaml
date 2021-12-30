@@ -10,7 +10,7 @@ spec:
       environment: dev
       role: authService
       tier: backend
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
