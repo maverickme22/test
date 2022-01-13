@@ -1,36 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quotes-svc
-  namespace: dev
+  name: {{ include "deploy.fullname" . }}
+  labels:
+    {{- include "deploy.labels" . | nindent 4 }}
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: quotes-svc
-      environment: dev
-      role: authService
-      tier: backend
-  replicas: {{ .Values.replicaCount }}
+      {{- include "deploy.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: quotes-svc
-        environment: dev
-        role: authService
-        tier: backend
+        {{- include "deploy.selectorLabels" . | nindent 8 }}
     spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
-        - name: quotes-service
-          image: nginx
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
-            requests:
-              cpu: 100m
-              memory: 100Mi
+            {{- toYaml .Values.resources | nindent 12 }}
           ports:
-            - containerPort: 80
-          # securityContext:
-          #   # runAsUser: kappa
-          #   # runAsNonRoot: true
-          #   privileged: false
-          #   allowPrivilegeEscalation: false
-          #   readOnlyRootFilesystem: true
+            - containerPort: {{ .Values.service.targetPort }}
+          livenessProbe:
+            exec:
+              command: ["/bin/grpc_health_probe", "-addr=:9090"]
+            initialDelaySeconds: 10
+          readinessProbe:
+            exec:
+              command: ["/bin/grpc_health_probe", "-addr=:9090"]
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+          env:
+            - name: "QUOTES_PORT"
+              value: {{ .Values.service.targetPort | quote }}
+        
