@@ -2,3 +2,7 @@ services:
   external:
     quotes-svc:
       replicaCount: 4
+
+  internal:
+    transfer-svc:
+      replicaCount: 5
