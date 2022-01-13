@@ -6,6 +6,6 @@ services:
       containerPort: 80
   
   internal:
-    transfer:
+    transfer-svc:
       replicaCount: 2
       containerPort: 80
