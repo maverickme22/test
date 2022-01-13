@@ -3,12 +3,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-svc
+  name: {{ $service }}
   namespace: dev
 spec:
   selector:
     matchLabels:
-      app: auth-svc
+      app: {{ $service }}
       environment: dev
       role: authService
       tier: backend
@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       labels:
-        app: auth-svc
+        app: {{ $service }}
         environment: dev
         role: authService
         tier: backend
