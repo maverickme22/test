@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kappa-backend-dev
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - service-name: quotes-dev
+        path: quotes
+      - service-name: transfers-dev
+        path: transfers
+  template:
+    metadata:
+      name: '{{service-name}}-dev'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/maverickme22/test.git
+        targetRevision: HEAD
+        path: helm/kappa/{{path}}
+        helm:
+          valueFiles: ['values-dev.yaml']
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: dev

@@ -1,0 +1,39 @@
+{{- range $service, $val := .Values.services.internal }}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $service }}
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: {{ $service }}
+      environment: dev
+      role: authService
+      tier: backend
+  replicas: {{ .replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ $service }}
+        environment: dev
+        role: authService
+        tier: backend
+    spec:
+      containers:
+        - name: {{ $service }}
+          image: nginx
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: {{ .containerPort }}
+          # securityContext:
+          #   # runAsUser: kappa
+          #   # runAsNonRoot: true
+          #   privileged: false
+          #   allowPrivilegeEscalation: false
+          #   readOnlyRootFilesystem: true
+{{- end }}

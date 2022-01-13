@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transfers-svc
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: transfers-svc
+      environment: dev
+      role: authService
+      tier: backend
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: transfers-svc
+        environment: dev
+        role: authService
+        tier: backend
+    spec:
+      containers:
+        - name: transfers-service
+          image: nginx
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 80
+          # securityContext:
+          #   # runAsUser: kappa
+          #   # runAsNonRoot: true
+          #   privileged: false
+          #   allowPrivilegeEscalation: false
+          #   readOnlyRootFilesystem: true
