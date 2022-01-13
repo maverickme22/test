@@ -1,1 +1,4 @@
 replicaCount: 1
+
+imagePullSecrets:
+   - name: quotes-dev-secret

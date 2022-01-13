@@ -1,1 +1,4 @@
 replicaCount: 2
+
+imagePullSecrets:
+   - name: transfers-dev-secret
