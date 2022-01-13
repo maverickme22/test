@@ -1,11 +1,9 @@
 
 services:
   external:
-    quotes-svc:
+    quotes:
       replicaCount: 2
-      containerPort: 80
   
   internal:
     transfer:
       replicaCount: 2
-      containerPort: 80

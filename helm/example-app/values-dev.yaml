@@ -1,1 +1,4 @@
-replicaCount: 2
+services:
+  external:
+    quotes-svc:
+      replicaCount: 3

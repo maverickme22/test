@@ -1,0 +1,39 @@
+{{- range $service, $val := .Values.services.external }}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-svc
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: auth-svc
+      environment: dev
+      role: authService
+      tier: backend
+  replicas: {{ .replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: auth-svc
+        environment: dev
+        role: authService
+        tier: backend
+    spec:
+      containers:
+        - name: {{ $service }}
+          image: nginx
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: {{ .containerPort }}
+          # securityContext:
+          #   # runAsUser: kappa
+          #   # runAsNonRoot: true
+          #   privileged: false
+          #   allowPrivilegeEscalation: false
+          #   readOnlyRootFilesystem: true
+{{- end }}
