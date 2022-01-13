@@ -1,4 +1,4 @@
 services:
   external:
     quotes-svc:
-      replicaCount: 3
+      replicaCount: 1
